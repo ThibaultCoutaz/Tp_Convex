@@ -54,7 +54,8 @@ public:
 		return Vector2d(x*scalar, y*scalar);
 	}
 	Vector2d operator/(const float& scalar) const {
-		return Vector2d(x/scalar,y/scalar);
+		float mult = 1.f / scalar;
+		return operator*(mult);
 	}
 
 	//Product functions

@@ -77,3 +77,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.opensdf
+*.sdf
+*.tlog
+*.pdb
+*.idb
+*.log
+*.ilk
+Convexe_TP.sdf

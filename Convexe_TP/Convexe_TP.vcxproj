@@ -118,8 +118,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Convex2d.h" />
     <ClInclude Include="Polygone2d.h" />
     <ClInclude Include="Vector2d.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Convex2d.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Polygone2d.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

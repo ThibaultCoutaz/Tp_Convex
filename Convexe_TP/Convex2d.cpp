@@ -6,7 +6,6 @@ Convex2d::Convex2d(): Polygone2d(std::vector<Vector2d>())
 {
 }
 
-
 Convex2d::Convex2d(Vector2d a, Vector2d b, Vector2d c)
 {
 //	std::cout << "cross " << Vector2d::CrossProduct(b - a, c - a) << std::endl;
@@ -33,3 +32,8 @@ Convex2d::Convex2d(Vector2d a, Vector2d b, Vector2d c)
 //{
 //
 //}
+void Convex2d::displayData() {
+	for (int i = 0; i < sommets.size(); ++i) {
+		std::cout << "x " << sommets[i].x << " y " << sommets[i].y << std::endl;
+	}
+}

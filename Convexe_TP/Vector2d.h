@@ -1,4 +1,8 @@
 #pragma once
+#include <iostream> 
+
+using namespace std;
+
 class Vector2d {
 
 public:
@@ -38,11 +42,17 @@ public:
 	}
 
 	/*Check which Vectors are closer or further from the
-	origin.*/
-	/*bool operator>(const Vector2d&) const;
+	origin.
+	bool operator>(const Vector2d&) const;
 	bool operator<(const Vector2d&) const;
 	bool operator>=(const Vector2d&) const;
 	bool operator<=(const Vector2d&) const;*/
+
+	friend ostream& operator<<(ostream& os, const Vector2d& v)
+	{
+		os << "x = " << v.x << "//y = " << v.y << "\n";
+		return os;
+	}
 
 	//Negate both the x and y values.
 	Vector2d operator-() const {

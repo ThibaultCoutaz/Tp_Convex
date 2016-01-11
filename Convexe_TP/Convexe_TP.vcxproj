@@ -118,14 +118,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ColorRGB.h" />
     <ClInclude Include="Convex2d.h" />
     <ClInclude Include="Polygone2d.h" />
+    <ClInclude Include="Svg.h" />
+    <ClInclude Include="SvgHelper.h" />
     <ClInclude Include="Vector2d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Convex2d.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Polygone2d.cpp" />
+    <ClCompile Include="Svg.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

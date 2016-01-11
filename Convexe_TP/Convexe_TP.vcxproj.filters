@@ -24,6 +24,15 @@
     <ClInclude Include="Convex2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Svg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SvgHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorRGB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Polygone2d.cpp">
@@ -33,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Svg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

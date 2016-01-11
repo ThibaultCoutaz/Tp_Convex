@@ -1,11 +1,14 @@
 #pragma once
-#include "Vector2d.h";
-#include <vector>
-class Polygone2d {
+#include "Vector2d.h"
+#include "SvgHelper.h"
+#include "ColorRGB.h"
 
-public:
+class Polygone2d 
+{
+	ColorRGB color;
 	std::vector<Vector2d> sommets;
-
-	Polygone2d(std::vector<Vector2d> sommets);
-
+public:
+	
+	Polygone2d(const std::vector<Vector2d> &s, const ColorRGB &c = ColorRGB());
+	std::string toString() const;
 };

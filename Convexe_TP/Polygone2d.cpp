@@ -1,5 +1,11 @@
 #include "Polygone2d.h"
 
+
+Polygone2d::Polygone2d() : sommets(std::vector<Vector2d>())
+{
+
+}
+
 Polygone2d::Polygone2d(const std::vector<Vector2d> &s, const ColorRGB &c) : sommets(s), color(c)
 {
 }

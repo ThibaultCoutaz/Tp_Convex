@@ -10,6 +10,15 @@ Polygone2d::Polygone2d(const std::vector<Vector2d> &s, const ColorRGB &c) : somm
 {
 }
 
+/* Write vertices on standard input
+*/
+void Polygone2d::displayData() const
+{
+	for (int i = 0; i < sommets.size(); ++i) {
+		std::cout << sommets[i] << std::endl;
+	}
+}
+
 std::string Polygone2d::toString() const
 {
 	std::stringstream ss;

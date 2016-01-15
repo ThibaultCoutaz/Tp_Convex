@@ -85,3 +85,10 @@ $RECYCLE.BIN/
 *.log
 *.ilk
 Convexe_TP.sdf
+*.iobj
+*.ipdb
+*.svg
+*.suo
+*.opendb
+*.sdf
+*.svg

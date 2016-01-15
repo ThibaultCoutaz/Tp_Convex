@@ -6,27 +6,33 @@
 #include <iostream>
 class Convex2d : public Polygone2d
 {
+	/* Check if an edge "looking at point" in an anti-clockwise way  
+	*	a, b : point of edges
+	*   p : point which look at
+	*/
+	bool IsEdgeLookingAtPoint(const Vector2d &, const Vector2d &, const Vector2d &) const; // check if an edges A, B looking at point P
 public:
-	Convex2d(); // to remove
-	Convex2d(Vector2d, Vector2d, Vector2d); // put in trigo order
-	//Convex2d(Convex2d, Vector2d); // add a vertex to convex set
-	//Convex2d(std::vector<Vector2d>); // call previous constructor
-	Convex2d(const std::vector<Vector2d> & vs) : Polygone2d() { sommets = vs; }
-	void displayData();
+	Convex2d();
+	/* Create a convex from 3 point put in trigo order
+	*	a, b, c : point of triangle
+	*/
+	Convex2d(const Vector2d &, const Vector2d &, const Vector2d &);
 	
+	/* Create a convex set from a convex and a point (point will be in the convex and point of convex may be erased)
+	*  convex : Convex polygon
+	*  verteces : Point to add to previous convex
+	*/
+	Convex2d(Convex2d, const Vector2d &);
+
+	/* Create a convex polygon from set of point in any order
+	*  vertices : set of point
+	*/
+	Convex2d(std::vector<Vector2d>);
+
+	
+	// Minkoswki sum
+	Convex2d & operator+(const Convex2d &C);
+
 
 };
 
-// Somme de Minkoswki
-inline Convex2d operator+(const Convex2d &A, const Convex2d &B) {
-	std::vector<Vector2d> res = std::vector<Vector2d>();
-
-	for (int i = 0; i < B.sommets.size(); ++i) {
-		for (int j = 0; j < A.sommets.size(); ++j) {
-			Vector2d new_sommet = A.sommets[j] + B.sommets[i];
-			res.push_back(new_sommet);
-		}
-	}
-
-	return Convex2d(res);
-}

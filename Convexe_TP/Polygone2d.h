@@ -13,4 +13,7 @@ public:
 	Polygone2d();
 	Polygone2d(const std::vector<Vector2d> &s, const ColorRGB &c = ColorRGB());
 	std::string toString() const;
+	/* Write vertices on standard input
+	*/
+	virtual void displayData() const;
 };

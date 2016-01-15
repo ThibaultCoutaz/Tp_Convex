@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream> 
+#include "Global.h"
 
 using namespace std;
 
@@ -10,34 +11,27 @@ public:
 	float x;
 	float y;
 
-	Vector2d() {
-		x = 0.f;
-		y = 0.f;
-	}
+	Vector2d();
+	Vector2d(float _x, float _y);
 
-	Vector2d(float _x, float _y) {
-		x = _x;
-		y = _y;
-	}
-
-	Vector2d operator+(const Vector2d& v) const {
+	inline Vector2d operator+(const Vector2d& v) const {
 		return Vector2d(x + v.x, y + v.y);
 	}
 
-	Vector2d operator-(const Vector2d& v) const {
+	inline Vector2d operator-(const Vector2d& v) const {
 		return Vector2d(x - v.x, y - v.y);
 	}
 
-	Vector2d operator*(const Vector2d& v) const {
+	inline Vector2d operator*(const Vector2d& v) const {
 		return Vector2d(x * v.x, y * v.y);
 	}
 
-	Vector2d operator/(const Vector2d& v) const {
+	inline Vector2d operator/(const Vector2d& v) const {
 		return Vector2d(x / v.x, y / v.y);
 	}
 
 	//Check if the Vectors have the same values.
-	bool operator==(const Vector2d& v) const {
+	inline bool operator==(const Vector2d& v) const {
 		return(x == v.x && y == v.y);
 	}
 
@@ -55,26 +49,41 @@ public:
 	}
 
 	//Negate both the x and y values.
-	Vector2d operator-() const {
+	inline Vector2d operator-() const {
 		return Vector2d(-x, -y);
 	}
 
 	//Apply scalar operations.
-	Vector2d operator*(const float& scalar) const {
+	inline Vector2d operator*(const float& scalar) const {
 		return Vector2d(x*scalar, y*scalar);
 	}
-	Vector2d operator/(const float& scalar) const {
+	inline Vector2d operator/(const float& scalar) const {
 		float mult = 1.f / scalar;
 		return operator*(mult);
 	}
 
 	//Product functions
-	static float DotProduct(const Vector2d& a, const Vector2d& b) {
+	inline static float DotProduct(const Vector2d& a, const Vector2d& b) {
 		return ((a.x * b.x) + (a.y * b.y));
 	}
 
-	static float CrossProduct(const Vector2d& a, const Vector2d& b) {
+	inline static float CrossProduct(const Vector2d& a, const Vector2d& b) {
 		return ((a.x * b.y) - (a.y * b.x));
 	}
 
+	inline float LengthSquared() const {
+		return x*x + y*y;
+	}
+
+
+	inline float Length() const {
+		return sqrt(LengthSquared());
+	}
+
+	inline static Vector2d Normalize(Vector2d v)
+	{
+		return v/v.LengthSquared();
+	}
+
+	static Vector2d Random(float, float, float, float);
 };

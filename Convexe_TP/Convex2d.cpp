@@ -41,6 +41,7 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 {
 	vertices = convex.vertices;
 	edges = convex.edges;
+	std::vector<Vector2d> erased;
 	for (int i = 0; i < edges.size(); ++i)
 	{
 		std::cout << " i " << i << " edges size " << edges.size() << std::endl;
@@ -48,6 +49,7 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 		if (!IsEdgeLookingAtPoint(vertices[edges[i].x], vertices[edges[i].y], vertex))
 		{
 			std::cout << "no ! i : " << i << " dir " << vertices[edges[i].y] - vertices[edges[i].x] << std::endl;
+			erased.push_back(edges[i]);
 			edges.erase(edges.begin() + i);
 			--i;
 		/*	for (int i = 0; i < edges.size(); ++i)
@@ -61,8 +63,9 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	vertices.push_back(vertex);
 	std::cout << " push back : " << vertex << std::endl;
 	int size = vertices.size() - 1;
-	edges[edges.size() - 1].y = size;
-	edges.push_back(Vector2d(size, 0));
+	//edges[edges.size() - 1].y = size;
+	edges.push_back(Vector2d(size, erased[0].x));
+	edges.push_back(Vector2d(erased[0].y, size));
 }
 
 /* Create a convex polygon from set of point in any order

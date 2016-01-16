@@ -1,11 +1,11 @@
 <?xml version="1.0" standalone="no" ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="1000px" height="1000px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
-	<line x1="24.9336" y1="699.179" x2="308.267" y2="960.295" style = 'stroke:#006600;'/>
-	<line x1="243.965" y1="259.987" x2="563.433" y2="576.983" style = 'stroke:#006600;'/>
-	<line x1="563.433" y1="576.983" x2="24.9336" y2="699.179" style = 'stroke:#006600;'/>
-	<circle cx="24.9336" cy="699.179" r="5" fill="rgb(255,0,0)" />
-	<circle cx="308.267" cy="960.295" r="5" fill="rgb(255,0,0)" />
-	<circle cx="243.965" cy="259.987" r="5" fill="rgb(255,0,0)" />
-	<circle cx="563.433" cy="576.983" r="5" fill="rgb(255,0,0)" />
+	<line x1="714.835" y1="910.611" x2="963.622" y2="597.522" style = 'stroke:#006600;'/>
+	<line x1="35.6761" y1="523.362" x2="963.622" y2="597.522" style = 'stroke:#006600;'/>
+	<line x1="390.759" y1="658.132" x2="35.6761" y2="523.362" style = 'stroke:#006600;'/>
+	<circle cx="963.622" cy="597.522" r="5" fill="rgb(255,0,0)" />
+	<circle cx="390.759" cy="658.132" r="5" fill="rgb(255,0,0)" />
+	<circle cx="714.835" cy="910.611" r="5" fill="rgb(255,0,0)" />
+	<circle cx="35.6761" cy="523.362" r="5" fill="rgb(255,0,0)" />
 </svg>

@@ -96,7 +96,7 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 {
 	Vector2d AB = b - a;
 	Vector2d I = AB * 0.5f;
-	return Vector2d::DotProduct(Vector2d::Normalize((b - (a + (I - a)) ).rotate90AntiClockwise() ), Vector2d::Normalize((p - (a + (I - a)))) ) < 0.f;
+	return Vector2d::DotProduct(Vector2d::Normalize((b - (a + (I - a)) ).rotate90AntiClockwise() ), Vector2d::Normalize((p - (a + (I - a)))) ) > 0.f;
 }
 
 Convex2d & Convex2d::operator+(const Convex2d &C) {

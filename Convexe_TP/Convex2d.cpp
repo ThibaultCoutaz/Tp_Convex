@@ -64,8 +64,45 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	std::cout << " push back : " << vertex << std::endl;
 	int size = vertices.size() - 1;
 	//edges[edges.size() - 1].y = size;
-	edges.push_back(Vector2d(size, erased[0].x));
-	edges.push_back(Vector2d(erased[0].y, size));
+	if (erased.size() > 0)
+	{
+		int newP1;// = erased.front().x;
+		int newP2;// = erased.back().x;
+		for (int i = 0; i < edges.size(); ++i)
+		{
+			bool isYTheLast = true;
+			bool isXTheLast = true;
+			for (int j = 0; j < edges.size(); ++j)
+			{
+				if (edges[i].y == edges[j].x)
+				{
+					isYTheLast = false;
+				}
+				if (edges[i].x == edges[j].y)
+				{
+					isXTheLast = false;
+				}
+			}
+			if (isYTheLast)
+				newP2 = edges[i].y;
+
+			if (isXTheLast)
+				newP1 = edges[i].x;
+		}
+		/*
+		for (int i = 1; i < erased.size(); ++i)
+		{
+			newP1 = std::min(newP1, (int)erased[i].x);
+			newP2 = std::max(newP2, (int)erased[i].y);
+		}*/
+		edges.push_back(Vector2d(size, newP1));
+		edges.push_back(Vector2d(newP2, size));
+	}
+	else
+	{
+		edges[edges.size() - 1].y = size;
+		edges.push_back(Vector2d(size, 0));
+	}
 }
 
 /* Create a convex polygon from set of point in any order

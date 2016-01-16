@@ -8,8 +8,8 @@
 
 int main(int argc, char ** argv)
 {
-	const int WIDTH = 1600;
-	const int HEIGHT = 900;
+	const int WIDTH = 1000;
+	const int HEIGHT = 1000;
 
 	// Test convex 2D creation
 	/*********************************************************************************************************************************************/
@@ -24,15 +24,15 @@ int main(int argc, char ** argv)
 		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
 	}
 
-	Polygone2d poly2(testConvexRandom);
-	Convex2d convex2(testConvexRandom);
-	std::cout << " Poly : " << std::endl;
-	poly2.displayData();
+	Polygone2d poly2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
+	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
+	/*std::cout << " Poly : " << std::endl;
+	poly2.displayData();*/
 
 	std::cout << " Convex : " << std::endl;
 	convex2.displayData();
 	Svg doc("test.svg", WIDTH, HEIGHT);
-	doc.addPolygon(poly2);
+	doc.addPolygon(convex2);
 	doc.save();
 
 	//std::vector<Vector2d> triangle_1 = std::vector<Vector2d>({ Vector2d(0,-10), Vector2d(0,10), Vector2d(10,0) });

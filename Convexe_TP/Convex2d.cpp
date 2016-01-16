@@ -1,14 +1,14 @@
 #include "Convex2d.h"
 
 
-Convex2d::Convex2d(): Polygone2d(std::vector<Vector2d>())
+Convex2d::Convex2d(const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color)
 {
 }
 
 /* Create a convex from 3 point put in trigo order
 *	a, b, c : point of triangle
 */
-Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c)
+Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color)
 {
 	if (Vector2d::CrossProduct(b - a, c - a) > 0.f)
 	{
@@ -28,7 +28,7 @@ Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c)
 * convex : Convex polygon
 * verteces : Point to add to previous convex
 */
-Convex2d::Convex2d(Convex2d convex, const Vector2d & verteces) : Polygone2d() // add a vertex to convex set
+Convex2d::Convex2d(Convex2d convex, const Vector2d & verteces, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color) // add a vertex to convex set
 {
 	sommets = convex.sommets;
 	for (int i = 0; i < sommets.size() - 1; ++i)
@@ -45,19 +45,20 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & verteces) : Polygone2d() //
 /* Create a convex polygon from set of point in any order
 * vertices : set of point
 */
-Convex2d::Convex2d(std::vector<Vector2d> verteces)
+Convex2d::Convex2d(std::vector<Vector2d> verteces, const ColorRGB& color2)
 {
 	int size = (int)verteces.size();
-	Convex2d firstTriangle = Convex2d(verteces[size - 1], verteces[size - 2], verteces[size - 3]);
+	Convex2d firstTriangle = Convex2d(verteces[size - 1], verteces[size - 2], verteces[size - 3], color2);
 	sommets = firstTriangle.sommets;
 	for (int i = 0; i < 3; ++i)
 		verteces.pop_back();
 	while (verteces.size() > 0)
 	{
-		firstTriangle = Convex2d(firstTriangle, verteces.back());
+		firstTriangle = Convex2d(firstTriangle, verteces.back(), color2);
 		sommets = firstTriangle.sommets;
 		verteces.pop_back();
 	}
+	color = color2;
 }
 
 

@@ -10,7 +10,7 @@ Convex2d::Convex2d(const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), 
 */
 Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color)
 {
-	if (Vector2d::CrossProduct(b - a, c - a) > 0.f) // y en bas
+	if (Vector2d::CrossProduct(b - a, c - a) >= 0.f)
 	{
 		vertices.push_back(a);
 		vertices.push_back(b);
@@ -43,12 +43,13 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	edges = convex.edges;
 	for (int i = 0; i < edges.size(); ++i)
 	{
-
+		std::cout << " i " << i << " edges size " << edges.size() << std::endl;
 		std::cout << std::endl << " verteces : " << vertex << std::endl;
 		if (!IsEdgeLookingAtPoint(vertices[edges[i].x], vertices[edges[i].y], vertex))
 		{
-		//	std::cout << "no ! i : " << i << " dir " << vertices[edges[i].y] - vertices[edges[i].x] << std::endl;
+			std::cout << "no ! i : " << i << " dir " << vertices[edges[i].y] - vertices[edges[i].x] << std::endl;
 			edges.erase(edges.begin() + i);
+			--i;
 		/*	for (int i = 0; i < edges.size(); ++i)
 			{
 				if(edges[i].x > 
@@ -96,7 +97,7 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 {
 	Vector2d AB = b - a;
 	Vector2d I = AB * 0.5f;
-	return Vector2d::DotProduct(Vector2d::Normalize((b - I).rotate90AntiClockwise() ), Vector2d::Normalize(p - I)) > 0.f;
+	return Vector2d::DotProduct(Vector2d::Normalize((b - I).rotate90Clockwise() ), Vector2d::Normalize(p - I)) > 0.f;
 }
 
 Convex2d & Convex2d::operator+(const Convex2d &C) {

@@ -91,4 +91,8 @@ public:
 	inline Vector2d rotate90AntiClockwise() const {
 		return Vector2d(-y, x);
 	}
+
+	inline Vector2d rotate90Clockwise() const {
+		return Vector2d(y, -x);
+	}
 };

@@ -44,30 +44,19 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	std::vector<Vector2d> erased;
 	for (int i = 0; i < edges.size(); ++i)
 	{
-		std::cout << " i " << i << " edges size " << edges.size() << std::endl;
-		std::cout << std::endl << " verteces : " << vertex << std::endl;
 		if (!IsEdgeLookingAtPoint(vertices[edges[i].x], vertices[edges[i].y], vertex))
 		{
-			std::cout << "no ! i : " << i << " dir " << vertices[edges[i].y] - vertices[edges[i].x] << std::endl;
 			erased.push_back(edges[i]);
 			edges.erase(edges.begin() + i);
 			--i;
-		/*	for (int i = 0; i < edges.size(); ++i)
-			{
-				if(edges[i].x > 
-			}*/
 		}
-		else 
-			std::cout << "yes ! i : " << i << " sommeta " << edges[i].x << " sommetb " << edges[i].y << std::endl;
 	}
 	vertices.push_back(vertex);
-	std::cout << " push back : " << vertex << std::endl;
 	int size = vertices.size() - 1;
-	//edges[edges.size() - 1].y = size;
 	if (erased.size() > 0)
 	{
-		int newP1;// = erased.front().x;
-		int newP2;// = erased.back().x;
+		int newP1;
+		int newP2;
 		for (int i = 0; i < edges.size(); ++i)
 		{
 			bool isYTheLast = true;
@@ -89,19 +78,8 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 			if (isXTheLast)
 				newP1 = edges[i].x;
 		}
-		/*
-		for (int i = 1; i < erased.size(); ++i)
-		{
-			newP1 = std::min(newP1, (int)erased[i].x);
-			newP2 = std::max(newP2, (int)erased[i].y);
-		}*/
 		edges.push_back(Vector2d(size, newP1));
 		edges.push_back(Vector2d(newP2, size));
-	}
-	else
-	{
-		edges[edges.size() - 1].y = size;
-		edges.push_back(Vector2d(size, 0));
 	}
 }
 

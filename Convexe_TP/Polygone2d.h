@@ -18,5 +18,5 @@ public:
 	virtual std::string toStringPoint(unsigned int) const;
 	/* Write vertices on standard input
 	*/
-	virtual void displayData(unsigned int) const;
+	virtual void displayData() const;
 };

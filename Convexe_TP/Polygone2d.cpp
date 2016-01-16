@@ -22,7 +22,7 @@ Polygone2d::Polygone2d(const std::vector<Vector2d> &vertices_, const ColorRGB &c
 
 /* Write vertices on standard input
 */
-void Polygone2d::displayData(unsigned int HEIGHT) const
+void Polygone2d::displayData() const
 {
 	for (int i = 0; i < vertices.size(); ++i) {
 		std::cout << vertices[i].x << "," << vertices[i].y << " " << std::endl;

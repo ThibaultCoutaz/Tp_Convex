@@ -12,15 +12,24 @@ Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, c
 {
 	if (Vector2d::CrossProduct(b - a, c - a) > 0.f)
 	{
-		sommets.push_back(a);
-		sommets.push_back(b);
-		sommets.push_back(c);
+		vertices.push_back(a);
+		vertices.push_back(b);
+		vertices.push_back(c);
 	}
 	else
 	{
-		sommets.push_back(a);
-		sommets.push_back(c);
-		sommets.push_back(b);
+		vertices.push_back(a);
+		vertices.push_back(c);
+		vertices.push_back(b);
+	}
+	if (vertices.size() > 0)
+	{
+		for (int i = 0; i < vertices.size() - 1; ++i)
+		{
+			edges.push_back(Vector2d(i, i + 1));
+		}
+
+		edges.push_back(Vector2d(vertices.size() - 1, 0));
 	}
 }
 
@@ -28,18 +37,31 @@ Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, c
 * convex : Convex polygon
 * verteces : Point to add to previous convex
 */
-Convex2d::Convex2d(Convex2d convex, const Vector2d & verteces, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color) // add a vertex to convex set
+Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color) // add a vertex to convex set
 {
-	sommets = convex.sommets;
-	for (int i = 0; i < sommets.size() - 1; ++i)
+	vertices = convex.vertices;
+	edges = convex.edges;
+	for (int i = 0; i < edges.size(); ++i)
 	{
 
-		if (!IsEdgeLookingAtPoint(sommets[i], sommets[i + 1], verteces))
+		std::cout << std::endl << " verteces : " << vertex << std::endl;
+		if (!IsEdgeLookingAtPoint(vertices[edges[i].x], vertices[edges[i].y], vertex))
 		{
-			sommets.erase(sommets.begin() + i);
+			std::cout << "no ! i : " << i << " dir " << vertices[edges[i].y] - vertices[edges[i].x] << std::endl;
+			edges.erase(edges.begin() + i);
+		/*	for (int i = 0; i < edges.size(); ++i)
+			{
+				if(edges[i].x > 
+			}*/
 		}
+
+		std::cout << "yes ! i : " << i << " sommeta " << vertices[edges[i].x] << " sommetb " << vertices[edges[i].y] << std::endl;
 	}
-	sommets.push_back(verteces);
+	vertices.push_back(vertex);
+
+	int size = vertices.size() - 1;
+	edges[edges.size() - 1].y = size;
+	edges.push_back(Vector2d(size, 0));
 }
 
 /* Create a convex polygon from set of point in any order
@@ -49,16 +71,19 @@ Convex2d::Convex2d(std::vector<Vector2d> verteces, const ColorRGB& color2)
 {
 	int size = (int)verteces.size();
 	Convex2d firstTriangle = Convex2d(verteces[size - 1], verteces[size - 2], verteces[size - 3], color2);
-	sommets = firstTriangle.sommets;
+	vertices = firstTriangle.vertices;
+	edges = firstTriangle.edges;
 	for (int i = 0; i < 3; ++i)
 		verteces.pop_back();
 	while (verteces.size() > 0)
 	{
 		firstTriangle = Convex2d(firstTriangle, verteces.back(), color2);
-		sommets = firstTriangle.sommets;
+		vertices = firstTriangle.vertices;
+		edges = firstTriangle.edges;
 		verteces.pop_back();
 	}
 	color = color2;
+	
 }
 
 
@@ -71,14 +96,14 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 {
 	Vector2d AB = b - a;
 	Vector2d I = AB * 0.5f;
-	return Vector2d::DotProduct(Vector2d::Normalize((b - a).rotate90AntiClockwise()), Vector2d::Normalize(p - I)) > 0.f;
+	return Vector2d::DotProduct(Vector2d::Normalize((b - a).rotate90AntiClockwise() + (I - a)), Vector2d::Normalize((p - a) + (I - a)) ) > 0.f;
 }
 
 Convex2d & Convex2d::operator+(const Convex2d &C) {
 
-	for (int i = 0; i < C.sommets.size(); ++i) {
-		for (int j = 0; j < sommets.size(); ++j) {
-			sommets[j] = sommets[j] + C.sommets[i];
+	for (int i = 0; i < C.vertices.size(); ++i) {
+		for (int j = 0; j < vertices.size(); ++j) {
+			vertices[j] = vertices[j] + C.vertices[i];
 		}
 	}
 

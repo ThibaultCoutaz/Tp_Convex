@@ -10,9 +10,10 @@ protected:
 	
 
 public:
-	std::vector<Vector2d> sommets;
+	std::vector<Vector2d> vertices;
+	std::vector<Vector2d> edges;
 	Polygone2d();
-	Polygone2d(const std::vector<Vector2d> &s, const ColorRGB &c = ColorRGB());
+	Polygone2d(const std::vector<Vector2d> &, const ColorRGB & = ColorRGB());
 	virtual std::string toString() const;
 	/* Write vertices on standard input
 	*/

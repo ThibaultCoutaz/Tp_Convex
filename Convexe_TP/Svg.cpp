@@ -36,3 +36,13 @@ void Svg::addPolygon(const Polygone2d &p)
 {
 	body += p.toString();
 }
+
+void Svg::addConvexEdge(const Convex2d &p)
+{
+	body += p.toStringEdges();
+}
+
+void Svg::addConvexPoint(const Polygone2d &p)
+{
+	body += p.toStringPoint();
+}

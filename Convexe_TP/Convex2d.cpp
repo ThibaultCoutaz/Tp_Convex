@@ -109,3 +109,14 @@ Convex2d & Convex2d::operator+(const Convex2d &C) {
 
 	return *this;
 }
+
+std::string Convex2d::toStringEdges() const
+{
+	std::stringstream ss;
+	for (unsigned i = 0; i < edges.size(); ++i) {
+		ss << elemStart("line");
+		ss << attribute("x1", vertices[edges[i].x].x) << attribute("y1", vertices[edges[i].x].y) << attribute("x2", vertices[edges[i].y].x) << attribute("y2", vertices[edges[i].y].y);
+		ss << "style = 'stroke:#006600;'" << emptyElemEnd();
+	}
+	return ss.str();
+}

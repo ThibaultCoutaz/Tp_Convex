@@ -45,3 +45,14 @@ std::string Polygone2d::toString() const
 	ss << attribute("fill", color.toString()) << emptyElemEnd();
 	return ss.str();
 }
+
+std::string Polygone2d::toStringPoint() const
+{
+	std::stringstream ss;
+
+	for (unsigned i = 0; i < vertices.size(); ++i) {
+		ss << elemStart("circle");
+		ss << attribute("cx", vertices[i].x) << attribute("cy", vertices[i].y) << attribute("r", 5) << attribute("fill", color.toString()) << emptyElemEnd();
+	}
+	return ss.str();
+}

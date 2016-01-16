@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Polygone2d.h"
+#include "Convex2d.h"
 
 class Svg
 {
@@ -17,5 +18,7 @@ public:
 	bool save() const;
 
 	void addPolygon(const Polygone2d &p);
+	void addConvexEdge(const Convex2d &p);
+	void addConvexPoint(const Polygone2d &p);
 };
 

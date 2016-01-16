@@ -37,8 +37,8 @@ int main(int argc, char ** argv)
 	std::cout << " Convex3 : " << std::endl;
 	convex3.displayData();
 	Svg doc("test.svg", WIDTH, HEIGHT);
-	//doc.addPolygon(poly2);
-	doc.addPolygon(convex2);
+	doc.addConvexEdge(convex2);
+	doc.addConvexPoint(convex2);
 	doc.save();
 
 	//std::vector<Vector2d> triangle_1 = std::vector<Vector2d>({ Vector2d(0,-10), Vector2d(0,10), Vector2d(10,0) });

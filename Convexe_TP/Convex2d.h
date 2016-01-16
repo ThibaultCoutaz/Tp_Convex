@@ -34,7 +34,7 @@ public:
 	Convex2d & operator+(const Convex2d &C);
 
 
-	virtual std::string toStringEdges() const;
+	 std::string toStringEdges(const int) const;
 
 
 };

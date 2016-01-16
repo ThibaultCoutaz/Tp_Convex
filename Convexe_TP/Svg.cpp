@@ -32,17 +32,17 @@ bool Svg::save() const
 	return true;
 }
 
-void Svg::addPolygon(const Polygone2d &p)
+void Svg::addPolygon(const Polygone2d &p, const int HEIGHT)
 {
-	body += p.toString();
+	body += p.toString(HEIGHT);
 }
 
-void Svg::addConvexEdge(const Convex2d &p)
+void Svg::addConvexEdge(const Convex2d &p, const int HEIGHT)
 {
-	body += p.toStringEdges();
+	body += p.toStringEdges(HEIGHT);
 }
 
-void Svg::addConvexPoint(const Polygone2d &p)
+void Svg::addConvexPoint(const Polygone2d &p, const int HEIGHT)
 {
-	body += p.toStringPoint();
+	body += p.toStringPoint(HEIGHT);
 }

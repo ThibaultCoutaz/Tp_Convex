@@ -22,37 +22,37 @@ Polygone2d::Polygone2d(const std::vector<Vector2d> &vertices_, const ColorRGB &c
 
 /* Write vertices on standard input
 */
-void Polygone2d::displayData() const
+void Polygone2d::displayData(unsigned int HEIGHT) const
 {
 	for (int i = 0; i < vertices.size(); ++i) {
-		std::cout << vertices[i] << std::endl;
+		std::cout << vertices[i].x << "," << HEIGHT - vertices[i].y << " " << std::endl;
 	}
 	for (int i = 0; i < edges.size(); ++i) {
 		std::cout << edges[i] << std::endl;
 	}
 }
 
-std::string Polygone2d::toString() const
+std::string Polygone2d::toString(unsigned int HEIGHT) const
 {
 	std::stringstream ss;
 	ss << elemStart("polygon");
 
 	ss << "points=\"";
 	for (unsigned i = 0; i < vertices.size(); ++i)
-		ss << vertices[i].x << "," << vertices[i].y << " ";
+		ss << vertices[i].x << "," << HEIGHT - vertices[i].y << " ";
 	ss << "\" ";
 
 	ss << attribute("fill", color.toString()) << emptyElemEnd();
 	return ss.str();
 }
 
-std::string Polygone2d::toStringPoint() const
+std::string Polygone2d::toStringPoint(unsigned int HEIGHT) const
 {
 	std::stringstream ss;
 
 	for (unsigned i = 0; i < vertices.size(); ++i) {
 		ss << elemStart("circle");
-		ss << attribute("cx", vertices[i].x) << attribute("cy", vertices[i].y) << attribute("r", 5) << attribute("fill", color.toString()) << emptyElemEnd();
+		ss << attribute("cx", vertices[i].x) << attribute("cy", HEIGHT - vertices[i].y) << attribute("r", 5) << attribute("fill", color.toString()) << emptyElemEnd();
 	}
 	return ss.str();
 }

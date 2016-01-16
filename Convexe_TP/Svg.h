@@ -17,8 +17,8 @@ public:
 	std::string toString() const;
 	bool save() const;
 
-	void addPolygon(const Polygone2d &p);
-	void addConvexEdge(const Convex2d &p);
-	void addConvexPoint(const Polygone2d &p);
+	void addPolygon(const Polygone2d &p, const int HEIGHT);
+	void addConvexEdge(const Convex2d &p, const int HEIGHT);
+	void addConvexPoint(const Polygone2d &p, const int HEIGHT);
 };
 

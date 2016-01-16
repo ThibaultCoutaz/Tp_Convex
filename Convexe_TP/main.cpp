@@ -3,11 +3,13 @@
 #include "Convex2d.h"
 #include "Vector2d.h"
 #include <iostream>
-
+#include<random>
+#include <time.h>
 //using namespace svg;
 
 int main(int argc, char ** argv)
 {
+	srand(time(NULL));
 	const int WIDTH = 1000;
 	const int HEIGHT = 1000;
 
@@ -18,20 +20,21 @@ int main(int argc, char ** argv)
 
 	//Convex2d convex(testConvex);
 	////convex.displayData();
-	//std::vector<Vector2d> testConvexRandom({ Vector2d(10, 100), Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) });
+//	std::vector<Vector2d> testConvexRandom({ Vector2d(10, 100), Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) });
 	std::vector<Vector2d> testConvexRandom;
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 4; ++i)
 	{
 		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
 	}
 
-	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
+//	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
 	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
 	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
+	Polygone2d poly2 = convex2;
 	std::cout << " Poly : " << std::endl;
 	poly2.displayData();
 
-	std::cout << " Convex : " << std::endl;
+	std::cout << " Convex2 : " << std::endl;
 	convex2.displayData();
 
 	std::cout << " Convex3 : " << std::endl;

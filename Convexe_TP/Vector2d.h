@@ -86,4 +86,9 @@ public:
 	}
 
 	static Vector2d Random(float, float, float, float);
+
+	//Negate both the x and y values.
+	inline Vector2d rotate90AntiClockwise() const {
+		return Vector2d(-y, x);
+	}
 };

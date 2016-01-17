@@ -36,6 +36,16 @@ public:
 
 	 std::string toStringEdges(const int) const;
 
+	 Convex2d & operator*(const float& scalar) {
+		 for (int i = 0; i < vertices.size(); ++i) {
+			 vertices[i] = vertices[i] * scalar;
+		 }
+		 return *this;
+	 }
+
+
+	 static  Convex2d Metamorph(Convex2d, Convex2d, float);
+
 
 };
 

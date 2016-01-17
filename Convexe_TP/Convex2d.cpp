@@ -146,3 +146,8 @@ std::string Convex2d::toStringEdges(const int HEIGHT) const
 	}
 	return ss.str();
 }
+
+Convex2d Convex2d::Metamorph(Convex2d a, Convex2d b, float t) {
+	return a*(1 - t) + b*t;
+}
+

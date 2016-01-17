@@ -120,12 +120,19 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 
 Convex2d & Convex2d::operator+(const Convex2d &C) {
 
+	//for (int i = 0; i < C.vertices.size(); ++i) {
+	//	for (int j = 0; j < vertices.size(); ++j) {
+	//		vertices[j] = vertices[j] + C.vertices[i];
+	//	}
+	//}
+	std::vector<Vector2d> newVerteces;
 	for (int i = 0; i < C.vertices.size(); ++i) {
 		for (int j = 0; j < vertices.size(); ++j) {
-			vertices[j] = vertices[j] + C.vertices[i];
+			newVerteces.push_back(vertices[j] + C.vertices[i]);
 		}
 	}
-
+	vertices = newVerteces;
+	//Convex2d(newVerteces, color);
 	return *this;
 }
 

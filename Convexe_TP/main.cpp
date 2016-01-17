@@ -38,11 +38,28 @@ int main(int argc, char ** argv)
 	//std::vector<Vector2d> triangle_1 = std::vector<Vector2d>({ Vector2d(0,-10), Vector2d(0,10), Vector2d(10,0) });
 	//std::vector<Vector2d> triangle_2 = std::vector<Vector2d>({ Vector2d(0,0), Vector2d(10,-10), Vector2d(10,10) });
 
-	//Convex2d c1 = Convex2d(triangle_1);
-	//Convex2d c2 = Convex2d(triangle_2);
+	Convex2d triangle({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
 
-	//Convex2d test = c1 + c2;
+	Convex2d square({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100), Vector2d(10, 100) }, ColorRGB(255.f, 255.f, 0.f));
+	//Convex2d c1 = Convex2d(triangle);
+	//Convex2d c2 = Convex2d(square);
+
+	Convex2d minkowskiSum((triangle + square).vertices, ColorRGB(255.f, 255.f, 0.f));
 	//test.displayData();
+	Svg minkowskiSumDoc("minkowskiSum.svg", WIDTH, HEIGHT);
+	minkowskiSumDoc.addConvexEdge(minkowskiSum, HEIGHT);
+	minkowskiSumDoc.addConvexPoint(minkowskiSum, HEIGHT);
+	minkowskiSumDoc.save();
+
+	Svg squareDoc("squareDoc.svg", WIDTH, HEIGHT);
+	squareDoc.addConvexEdge(square, HEIGHT);
+	squareDoc.addConvexPoint(square, HEIGHT);
+	squareDoc.save();
+
+	Svg triangleDoc("triangleDoc.svg", WIDTH, HEIGHT);
+	triangleDoc.addConvexEdge(triangle, HEIGHT);
+	triangleDoc.addConvexPoint(triangle, HEIGHT);
+	triangleDoc.save();
 
 
 	// Test export

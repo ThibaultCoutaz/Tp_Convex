@@ -51,16 +51,6 @@ public:
 	bool save() const;
 
 	/*!
-	*  \brief Add a polygon 2d
-	*
-	*  Add a polygon 2d in the file
-	*
-	*  \param p : The polygon
-	*  \param HEIGHT : Height
-	*/
-	void addPolygon(const Polygone2d &p, const int HEIGHT);
-
-	/*!
 	*  \brief Add the edges of a convex polygon
 	*
 	* Add the edges of a convex polygon 2d in the file

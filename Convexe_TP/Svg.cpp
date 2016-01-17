@@ -37,11 +37,6 @@ bool Svg::save() const
 	return true;
 }
 
-void Svg::addPolygon(const Polygone2d &p, const int HEIGHT)
-{
-	body += p.toString(HEIGHT);
-}
-
 void Svg::addConvexEdge(const Convex2d &p, const int HEIGHT)
 {
 	body += p.toStringEdges(HEIGHT);

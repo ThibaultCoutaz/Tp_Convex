@@ -1,11 +1,19 @@
-//#include "simple_svg.hpp"
+/*!
+* \file main.cpp
+* \brief Entry point
+*
+* Main
+*
+*/
+
+#include <iostream>
+#include <random>
+#include <time.h>
+
 #include "Svg.h"
 #include "Convex2d.h"
 #include "Vector2d.h"
-#include <iostream>
-#include<random>
-#include <time.h>
-//using namespace svg;
+
 
 int main(void)
 {

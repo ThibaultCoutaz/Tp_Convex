@@ -1,3 +1,11 @@
+/*!
+* \file Convex2d.cpp
+* \brief Source classe Convex2d
+*
+* Class Convex2d
+*
+*/
+
 #include "Convex2d.h"
 
 

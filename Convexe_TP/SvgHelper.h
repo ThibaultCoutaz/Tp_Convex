@@ -1,10 +1,25 @@
+/*!
+* \file SvgHelper.h
+* \brief Header classe SvgHelper
+*
+* Class SvgHelper
+*
+*/
+
 #pragma once
+
 #include <vector>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <iostream>
-// Singleton 
+
+
+/*! \class SvgHelper
+* \brief Class SvgHelper
+*
+*  
+*/
 class SvgHelper
 {
 public:

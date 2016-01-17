@@ -1,10 +1,15 @@
+/*!
+* \file Svg.cpp
+* \brief Source classe Svg
+*
+* Class Svg
+*
+*/
+
 #include "Svg.h"
 
-Svg::Svg(const std::string &filename, float w, const float h) : file_name(filename), width(w), height(h)
-{
-}
 
-Svg::~Svg()
+Svg::Svg(const std::string &filename, float w, const float h) : file_name(filename), width(w), height(h)
 {
 }
 

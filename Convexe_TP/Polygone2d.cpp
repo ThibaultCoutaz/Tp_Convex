@@ -1,3 +1,11 @@
+/*!
+* \file Polygone2d.cpp
+* \brief Source classe Polygone2d
+*
+* Class Polygone2d
+*
+*/
+
 #include "Polygone2d.h"
 
 

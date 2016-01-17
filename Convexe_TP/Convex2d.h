@@ -31,7 +31,7 @@ public:
 
 	
 	// Minkoswki sum
-	Convex2d & operator+(const Convex2d &C);
+	Convex2d minkoswkiSum(const Convex2d &C);
 
 
 	 std::string toStringEdges(const int) const;

@@ -7,9 +7,9 @@
 #include <time.h>
 //using namespace svg;
 
-int main(int argc, char ** argv)
+int main(void)
 {
-	srand(time(NULL));
+	srand((int)time(NULL));
 	const int WIDTH = 1000;
 	const int HEIGHT = 1000;
 
@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
 	////Convex2d c1 = Convex2d(triangle);
 	////Convex2d c2 = Convex2d(square);
 
-	//Convex2d minkowskiSum((triangle + square).vertices, ColorRGB(255.f, 255.f, 0.f));
+	//Convex2d minkowskiSum(triangle.minkowskiSum(square));
 	////test.displayData();
 	//Svg minkowskiSumDoc("minkowskiSum.svg", WIDTH, HEIGHT);
 	//minkowskiSumDoc.addConvexEdge(minkowskiSum, HEIGHT);
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
 	/*********************************************************************************************************************************************/
 	Convex2d PieceEchec2({ Vector2d(970, 10), Vector2d(880, 10),Vector2d(880, 35),Vector2d(860, 35),Vector2d(860, 65),Vector2d(880, 65),Vector2d(880, 100),Vector2d(850, 125),Vector2d(880, 150),Vector2d(970, 150),Vector2d(1000, 125),Vector2d(970, 100), Vector2d(970, 65),Vector2d(990, 65),Vector2d(990, 35),Vector2d(970, 35) }, ColorRGB(255.f, 255.f, 0.f));
 	Convex2d PieceEchec1({ Vector2d(30, 10), Vector2d(120, 10),Vector2d(120, 100), Vector2d(150, 120),Vector2d(150, 140), Vector2d(110, 140),Vector2d(110, 130),Vector2d(90, 130),Vector2d(90, 140),Vector2d(60, 140),Vector2d(60, 130),Vector2d(40, 130),Vector2d(40, 140),Vector2d(0, 140),Vector2d(0, 120),Vector2d(30, 100) }, ColorRGB(255.f, 255.f, 0.f));
-	Svg doc("test.svg", WIDTH, HEIGHT);
+	Svg doc("test.svg", (float)WIDTH, (float)HEIGHT);
 
 	Convex2d inter = Convex2d::Metamorph(PieceEchec1, PieceEchec2, 0.5f);
 

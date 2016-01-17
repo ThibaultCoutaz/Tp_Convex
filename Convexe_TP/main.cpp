@@ -9,7 +9,8 @@
 #include <iostream>
 #include <random>
 #include <time.h>
-
+#include <chrono>
+#include<fstream>
 #include "Svg.h"
 #include "Convex2d.h"
 #include "Vector2d.h"
@@ -20,7 +21,43 @@ int main(void)
 	srand((int)time(NULL));
 	const int WIDTH = 1000;
 	const int HEIGHT = 1000;
+	const int MAX_VERTEX = 100;
+	const int REPEAT_VERTEX = 5;
 
+
+	// Measure convexe creation from 3 to MAX_VERTEX 
+	/*********************************************************************************************************************************************/
+	std::ofstream mesureFile("mesureConvex.txt", std::ios::out | std::ios::trunc);
+
+	for (int i = 3; i < MAX_VERTEX; ++i)
+	{
+		float timeRes = 0.f;
+		//Convex2d measureConvex;
+		for (int repeat = 0; repeat < REPEAT_VERTEX; ++repeat)
+		{
+			std::vector<Vector2d> measureVertex;
+			for (int j = 0; j < i; ++j)
+			{
+				measureVertex.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
+			}
+			std::cout << " i : " << i << " size " << measureVertex.size() << std::endl;
+			auto start = std::chrono::high_resolution_clock::now();
+			Convex2d measureConvex(measureVertex, ColorRGB(255.f, 0.f, 0.f));
+			auto end = std::chrono::high_resolution_clock::now();
+			timeRes += std::chrono::duration<float, std::milli>(end - start).count();
+		/*	std::string s = "measure";
+			s.append(std::to_string(i));
+			s.append("_");
+			s.append(std::to_string(repeat));
+			s.append(".svg");
+			Svg doc(s, (float)WIDTH, (float)HEIGHT);
+			doc.addConvexPoint(measureConvex, HEIGHT);
+			doc.addConvexEdge(measureConvex, HEIGHT);
+			doc.save();*/
+		}
+		mesureFile << i << " " << timeRes / (float)REPEAT_VERTEX << std::endl;
+		
+	}
 	// Test convex 2D
 	/*********************************************************************************************************************************************/
 

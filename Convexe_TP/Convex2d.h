@@ -82,7 +82,7 @@ public:
 	*  \param C : Convex polygon 2d
 	*  \return A convex polygon created from the minkoswki sum
 	*/
-	Convex2d minkoswkiSum(const Convex2d &C);
+	Convex2d minkowskiSum(const Convex2d &C);
 
 	/*!
 	*  \brief 

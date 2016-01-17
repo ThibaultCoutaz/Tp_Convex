@@ -126,13 +126,8 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 	return Vector2d::DotProduct(Vector2d::Normalize((b - I).rotate90AntiClockwise() ), Vector2d::Normalize(p - I)) > 0.f;
 }
 
-Convex2d Convex2d::minkoswkiSum(const Convex2d &C) {
+Convex2d Convex2d::minkowskiSum(const Convex2d &C) {
 
-	//for (int i = 0; i < C.vertices.size(); ++i) {
-	//	for (int j = 0; j < vertices.size(); ++j) {
-	//		vertices[j] = vertices[j] + C.vertices[i];
-	//	}
-	//}
 	std::vector<Vector2d> newVerteces;
 	for (int i = 0; i < C.vertices.size(); ++i) {
 		for (int j = 0; j < vertices.size(); ++j) {
@@ -156,6 +151,6 @@ std::string Convex2d::toStringEdges(const int HEIGHT) const
 }
 
 Convex2d Convex2d::Metamorph(Convex2d a, Convex2d b, float t) {
-	return (a*(1 - t)).minkoswkiSum(b*t);
+	return (a*(1 - t)).minkowskiSum(b*t);
 }
 

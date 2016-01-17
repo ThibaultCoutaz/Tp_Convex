@@ -80,7 +80,7 @@ int main(int argc, char ** argv)
 	Convex2d PieceEchec1({ Vector2d(30, 10), Vector2d(120, 10),Vector2d(120, 100), Vector2d(150, 120),Vector2d(150, 140), Vector2d(110, 140),Vector2d(110, 130),Vector2d(90, 130),Vector2d(90, 140),Vector2d(60, 140),Vector2d(60, 130),Vector2d(40, 130),Vector2d(40, 140),Vector2d(0, 140),Vector2d(0, 120),Vector2d(30, 100) }, ColorRGB(255.f, 255.f, 0.f));
 	Svg doc("test.svg", WIDTH, HEIGHT);
 
-	Convex2d inter = Convex2d::Metamorph(PieceEchec1, PieceEchec2, 0.9f);
+	Convex2d inter = Convex2d::Metamorph(PieceEchec1, PieceEchec2, 0.5f);
 
 	doc.addConvexEdge(PieceEchec2, HEIGHT);
 	doc.addConvexEdge(PieceEchec1, HEIGHT);

@@ -55,8 +55,8 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	int size = vertices.size() - 1;
 	if (erased.size() > 0)
 	{
-		int newP1;
-		int newP2;
+		int newP1=0;
+		int newP2=0;
 		for (int i = 0; i < edges.size(); ++i)
 		{
 			bool isYTheLast = true;
@@ -148,6 +148,6 @@ std::string Convex2d::toStringEdges(const int HEIGHT) const
 }
 
 Convex2d Convex2d::Metamorph(Convex2d a, Convex2d b, float t) {
-	return a*(1 - t) + b*t;
+	return Convex2d((a*(1 - t) + b*t).vertices, ColorRGB(255.f, 0.f, 0.f));
 }
 

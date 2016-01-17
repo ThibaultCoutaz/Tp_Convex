@@ -1,38 +1,83 @@
-//#include "simple_svg.hpp"
+/*!
+* \file main.cpp
+* \brief Entry point
+*
+* Main
+*
+*/
+
+#include <iostream>
+#include <random>
+#include <time.h>
+#include <chrono>
+#include<fstream>
 #include "Svg.h"
 #include "Convex2d.h"
 #include "Vector2d.h"
-#include <iostream>
-#include<random>
-#include <time.h>
-//using namespace svg;
 
 
-const float M_PI = 3.141592653589793;
+const float M_PI = 3.141592653589793f;
 
-int main(int argc, char ** argv)
+int main(void)
 {
-	srand(time(NULL));
+	srand((int)time(NULL));
 	const int WIDTH = 3000;
 	const int HEIGHT = 2000;
+	const int MAX_VERTEX = 100;
+	const int REPEAT_VERTEX = 5;
 
+
+	// Measure convexe creation from 3 to MAX_VERTEX 
+	/*********************************************************************************************************************************************/
+	//std::ofstream mesureFile("mesureConvex.txt", std::ios::out | std::ios::trunc);
+
+	//for (int i = 3; i < MAX_VERTEX; ++i)
+	//{
+	//	float timeRes = 0.f;
+	//	//Convex2d measureConvex;
+	//	for (int repeat = 0; repeat < REPEAT_VERTEX; ++repeat)
+	//	{
+	//		std::vector<Vector2d> measureVertex;
+	//		for (int j = 0; j < i; ++j)
+	//		{
+	//			measureVertex.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
+	//		}
+	//		std::cout << " i : " << i << " size " << measureVertex.size() << std::endl;
+	//		auto start = std::chrono::high_resolution_clock::now();
+	//		Convex2d measureConvex(measureVertex, ColorRGB(255.f, 0.f, 0.f));
+	//		auto end = std::chrono::high_resolution_clock::now();
+	//		timeRes += std::chrono::duration<float, std::milli>(end - start).count();
+	//	/*	std::string s = "measure";
+	//		s.append(std::to_string(i));
+	//		s.append("_");
+	//		s.append(std::to_string(repeat));
+	//		s.append(".svg");
+	//		Svg doc(s, (float)WIDTH, (float)HEIGHT);
+	//		doc.addConvexPoint(measureConvex, HEIGHT);
+	//		doc.addConvexEdge(measureConvex, HEIGHT);
+	//		doc.save();*/
+	//	}
+	//	mesureFile << i << " " << timeRes / (float)REPEAT_VERTEX << std::endl;
+	//	
+	//}
 	// Test convex 2D
 	/*********************************************************************************************************************************************/
 
 	//////convex.displayData();
 //	std::vector<Vector2d> testConvexRandom;
-//	for (int i = 0; i < 100; ++i)
+//	for (int i = 0; i < 1000; ++i)
 //	{
 //		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
 //	}
-//
+////
 ////	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
 //	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
-//	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
-//	Polygone2d poly2 = convex2;
-//	Svg doc("test.svg", WIDTH, HEIGHT);
-//	doc.addConvexEdge(convex2, HEIGHT);
+////	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
+////	Polygone2d poly2 = convex2;
+//	Svg doc("test.svg", (float)WIDTH, (float)HEIGHT);
+//
 //	doc.addConvexPoint(convex2, HEIGHT);
+//	doc.addConvexEdge(convex2, HEIGHT);
 //	doc.save();
 
 	// Test Minkoswki
@@ -47,19 +92,19 @@ int main(int argc, char ** argv)
 	////Convex2d c1 = Convex2d(triangle);
 	////Convex2d c2 = Convex2d(square);
 
-	//Convex2d minkowskiSum((triangle + square).vertices, ColorRGB(255.f, 255.f, 0.f));
+	//Convex2d minkowskiSum(triangle.minkowskiSum(square));
 	////test.displayData();
-	//Svg minkowskiSumDoc("minkowskiSum.svg", WIDTH, HEIGHT);
+	//Svg minkowskiSumDoc("minkowskiSum.svg", (float)WIDTH, (float)HEIGHT);
 	//minkowskiSumDoc.addConvexEdge(minkowskiSum, HEIGHT);
 	//minkowskiSumDoc.addConvexPoint(minkowskiSum, HEIGHT);
 	//minkowskiSumDoc.save();
 
-	//Svg squareDoc("squareDoc.svg", WIDTH, HEIGHT);
+	//Svg squareDoc("squareDoc.svg", (float)WIDTH, (float)HEIGHT);
 	//squareDoc.addConvexEdge(square, HEIGHT);
 	//squareDoc.addConvexPoint(square, HEIGHT);
 	//squareDoc.save();
 
-	//Svg triangleDoc("triangleDoc.svg", WIDTH, HEIGHT);
+	//Svg triangleDoc("triangleDoc.svg", (float)WIDTH, (float)HEIGHT);
 	//triangleDoc.addConvexEdge(triangle, HEIGHT);
 	//triangleDoc.addConvexPoint(triangle, HEIGHT);
 	//triangleDoc.save();
@@ -84,11 +129,9 @@ int main(int argc, char ** argv)
 	Vector2d c(2900, 100); float rayon = 90;
 	std::vector<Vector2d> listVectorRond;
 	float factSide = 2.f * M_PI / (float)180;
-	float z = 0.f;
 	for (unsigned int i = 0; i < 180; i++)
 	{
 		float angle = i * factSide;
-		float nextAngle = (i + 1) * factSide;
 		listVectorRond.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
 	}
 	
@@ -98,7 +141,7 @@ int main(int argc, char ** argv)
 
 	Convex2d Polygone({ Vector2d(2400, 1500), Vector2d(2700,1400), Vector2d(2900, 2000) ,Vector2d(2600, 1300) }, ColorRGB(255.f, 255.f, 0.f));
 
-	Svg doc("Metamorph.svg", WIDTH, HEIGHT);
+	Svg doc("Metamorph.svg", (float)WIDTH, (float)HEIGHT);
 	Convex2d ListConvex[10]; 
 	Convex2d ListConvex2[5];
 	Convex2d ListConvex3[7];
@@ -132,7 +175,6 @@ int main(int argc, char ** argv)
 	
 	//doc.addConvexEdge(Polygone, HEIGHT);
 	doc.save();
-
 
 	system("pause");
 	return 1;

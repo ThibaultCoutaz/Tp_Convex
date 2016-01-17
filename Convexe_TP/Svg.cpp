@@ -1,23 +1,28 @@
+/*!
+* \file Svg.cpp
+* \brief Source classe Svg
+*
+* Class Svg
+*
+*/
+
 #include "Svg.h"
 
-Svg::Svg(const std::string &filename, float w, const float h) : file_name(filename), width(w), height(h)
-{
-}
 
-Svg::~Svg()
+Svg::Svg(const std::string &filename, float w, const float h) : file_name(filename), width(w), height(h)
 {
 }
 
 std::string Svg::toString() const
 {
 	std::stringstream ss;
-	ss << "<?xml " << attribute("version", "1.0") << attribute("standalone", "no")
+	ss << "<?xml " << SvgHelper::attribute("version", "1.0") << SvgHelper::attribute("standalone", "no")
 		<< "?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" "
 		<< "\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg "
-		<< attribute("width", width, "px")
-		<< attribute("height", height, "px")
-		<< attribute("xmlns", "http://www.w3.org/2000/svg")
-		<< attribute("version", "1.1") << ">\n" << body << elemEnd("svg");
+		<< SvgHelper::attribute("width", width, "px")
+		<< SvgHelper::attribute("height", height, "px")
+		<< SvgHelper::attribute("xmlns", "http://www.w3.org/2000/svg")
+		<< SvgHelper::attribute("version", "1.1") << ">\n" << body << SvgHelper::elemEnd("svg");
 	return ss.str();
 }
 

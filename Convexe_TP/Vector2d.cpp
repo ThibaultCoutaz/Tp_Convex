@@ -1,3 +1,11 @@
+/*!
+* \file Vector2d.cpp
+* \brief Source classe Vector2d
+*
+* Class Vector2d
+*
+*/
+
 #include "Vector2d.h"
 
 Vector2d::Vector2d() : x(0.f), y(0.f) 

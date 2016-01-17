@@ -1,3 +1,11 @@
+/*!
+* \file Convex2d.cpp
+* \brief Source classe Convex2d
+*
+* Class Convex2d
+*
+*/
+
 #include "Convex2d.h"
 
 Convex2d::Convex2d() : Polygone2d(std::vector<Vector2d>(), ColorRGB(255.f, 255.f, 0.f))
@@ -29,10 +37,10 @@ Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, c
 	{
 		for (int i = 0; i < vertices.size() - 1; ++i)
 		{
-			edges.push_back(Vector2d(i, i + 1));
+			edges.push_back(Vector2d((float)i, (float)(i + 1)));
 		}
 
-		edges.push_back(Vector2d(vertices.size() - 1, 0));
+		edges.push_back(Vector2d((float)(vertices.size() - 1), 0.f));
 	}
 }
 
@@ -47,7 +55,7 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 	std::vector<Vector2d> erased;
 	for (int i = 0; i < edges.size(); ++i)
 	{
-		if (!IsEdgeLookingAtPoint(vertices[edges[i].x], vertices[edges[i].y], vertex))
+		if (!IsEdgeLookingAtPoint(vertices[(int)edges[i].x], vertices[(int)edges[i].y], vertex))
 		{
 			erased.push_back(edges[i]);
 			edges.erase(edges.begin() + i);
@@ -55,7 +63,7 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 		}
 	}
 	vertices.push_back(vertex);
-	int size = vertices.size() - 1;
+	int size = (int)vertices.size() - 1;
 	if (erased.size() > 0)
 	{
 		int newP1=0;
@@ -76,13 +84,13 @@ Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& col
 				}
 			}
 			if (isYTheLast)
-				newP2 = edges[i].y;
+				newP2 = (int)edges[i].y;
 
 			if (isXTheLast)
-				newP1 = edges[i].x;
+				newP1 = (int)edges[i].x;
 		}
-		edges.push_back(Vector2d(size, newP1));
-		edges.push_back(Vector2d(newP2, size));
+		edges.push_back(Vector2d((float)size, (float)newP1));
+		edges.push_back(Vector2d((float)newP2, (float)size));
 	}
 }
 
@@ -121,13 +129,8 @@ bool Convex2d::IsEdgeLookingAtPoint(const Vector2d & a, const Vector2d & b, cons
 	return Vector2d::DotProduct(Vector2d::Normalize((b - I).rotate90AntiClockwise() ), Vector2d::Normalize(p - I)) > 0.f;
 }
 
-Convex2d & Convex2d::operator+(const Convex2d &C) {
+Convex2d Convex2d::minkowskiSum(const Convex2d &C) {
 
-	//for (int i = 0; i < C.vertices.size(); ++i) {
-	//	for (int j = 0; j < vertices.size(); ++j) {
-	//		vertices[j] = vertices[j] + C.vertices[i];
-	//	}
-	//}
 	std::vector<Vector2d> newVerteces;
 	for (int i = 0; i < C.vertices.size(); ++i) {
 		for (int j = 0; j < vertices.size(); ++j) {
@@ -135,22 +138,22 @@ Convex2d & Convex2d::operator+(const Convex2d &C) {
 		}
 	}
 	vertices = newVerteces;
-	//Convex2d(newVerteces, color);
-	return *this;
+	//
+	return Convex2d(newVerteces, color);
 }
 
 std::string Convex2d::toStringEdges(const int HEIGHT) const
 {
 	std::stringstream ss;
 	for (unsigned i = 0; i < edges.size(); ++i) {
-		ss << elemStart("line");
-		ss << attribute("x1", vertices[edges[i].x].x) << attribute("y1", HEIGHT - vertices[edges[i].x].y) << attribute("x2", vertices[edges[i].y].x) << attribute("y2", HEIGHT - vertices[edges[i].y].y);
-		ss << "style = 'stroke:#006600;'" << emptyElemEnd();
+		ss << SvgHelper::elemStart("line");
+		ss << SvgHelper::attribute("x1", vertices[(int)edges[i].x].x) << SvgHelper::attribute("y1", HEIGHT - vertices[(int)edges[i].x].y) << SvgHelper::attribute("x2", vertices[(int)edges[i].y].x) << SvgHelper::attribute("y2", HEIGHT - vertices[(int)edges[i].y].y);
+		ss << "style = 'stroke:#006600;'" << SvgHelper::emptyElemEnd();
 	}
 	return ss.str();
 }
 
 Convex2d Convex2d::Metamorph(Convex2d a, Convex2d b, float t) {
-	return Convex2d((a*(1 - t) + b*t).vertices, ColorRGB(255.f, 0.f, 0.f));
+	return (a*(1 - t)).minkowskiSum(b*t);
 }
 

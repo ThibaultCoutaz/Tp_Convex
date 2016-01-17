@@ -12,6 +12,9 @@ class Convex2d : public Polygone2d
 	*/
 	bool IsEdgeLookingAtPoint(const Vector2d &, const Vector2d &, const Vector2d &) const; // check if an edges A, B looking at point P
 public:
+
+	Convex2d();
+
 	Convex2d(const ColorRGB&);
 	/* Create a convex from 3 point put in trigo order
 	*	a, b, c : point of triangle

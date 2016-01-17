@@ -1,5 +1,8 @@
 #include "Convex2d.h"
 
+Convex2d::Convex2d() : Polygone2d(std::vector<Vector2d>(), ColorRGB(255.f, 255.f, 0.f))
+{
+}
 
 Convex2d::Convex2d(const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color)
 {

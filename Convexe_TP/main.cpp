@@ -7,11 +7,14 @@
 #include <time.h>
 //using namespace svg;
 
+
+const float M_PI = 3.141592653589793;
+
 int main(int argc, char ** argv)
 {
 	srand(time(NULL));
-	const int WIDTH = 1000;
-	const int HEIGHT = 1000;
+	const int WIDTH = 3000;
+	const int HEIGHT = 2000;
 
 	// Test convex 2D
 	/*********************************************************************************************************************************************/
@@ -76,17 +79,59 @@ int main(int argc, char ** argv)
 
 	// Test morph
 	/*********************************************************************************************************************************************/
-	Convex2d PieceEchec2({ Vector2d(970, 10), Vector2d(880, 10),Vector2d(880, 35),Vector2d(860, 35),Vector2d(860, 65),Vector2d(880, 65),Vector2d(880, 100),Vector2d(850, 125),Vector2d(880, 150),Vector2d(970, 150),Vector2d(1000, 125),Vector2d(970, 100), Vector2d(970, 65),Vector2d(990, 65),Vector2d(990, 35),Vector2d(970, 35) }, ColorRGB(255.f, 255.f, 0.f));
-	Convex2d PieceEchec1({ Vector2d(30, 10), Vector2d(120, 10),Vector2d(120, 100), Vector2d(150, 120),Vector2d(150, 140), Vector2d(110, 140),Vector2d(110, 130),Vector2d(90, 130),Vector2d(90, 140),Vector2d(60, 140),Vector2d(60, 130),Vector2d(40, 130),Vector2d(40, 140),Vector2d(0, 140),Vector2d(0, 120),Vector2d(30, 100) }, ColorRGB(255.f, 255.f, 0.f));
-	Svg doc("test.svg", WIDTH, HEIGHT);
+	//Convex2d PieceEchec2({ Vector2d(970, 10), Vector2d(880, 10),Vector2d(880, 35),Vector2d(860, 35),Vector2d(860, 65),Vector2d(880, 65),Vector2d(880, 100),Vector2d(850, 125),Vector2d(880, 150),Vector2d(970, 150),Vector2d(1000, 125),Vector2d(970, 100), Vector2d(970, 65),Vector2d(990, 65),Vector2d(990, 35),Vector2d(970, 35) }, ColorRGB(255.f, 255.f, 0.f));
+	
+	Vector2d c(2900, 100); float rayon = 90;
+	std::vector<Vector2d> listVectorRond;
+	float factSide = 2.f * M_PI / (float)180;
+	float z = 0.f;
+	for (unsigned int i = 0; i < 180; i++)
+	{
+		float angle = i * factSide;
+		float nextAngle = (i + 1) * factSide;
+		listVectorRond.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
+	}
+	
+	Convex2d Rond(listVectorRond, ColorRGB(255.f, 255.f, 0.f));
 
-	Convex2d inter = Convex2d::Metamorph(PieceEchec1, PieceEchec2, 0.5f);
+	Convex2d Triangle({Vector2d(10, 10), Vector2d(100, 10), Vector2d(55, 100)}, ColorRGB(255.f, 255.f, 0.f));
 
-	doc.addConvexEdge(PieceEchec2, HEIGHT);
-	doc.addConvexEdge(PieceEchec1, HEIGHT);
-	doc.addConvexEdge(inter, HEIGHT);
+	Convex2d Polygone({ Vector2d(2400, 1500), Vector2d(2700,1400), Vector2d(2900, 2000) ,Vector2d(2600, 1300) }, ColorRGB(255.f, 255.f, 0.f));
+
+	Svg doc("Metamorph.svg", WIDTH, HEIGHT);
+	Convex2d ListConvex[10]; 
+	Convex2d ListConvex2[5];
+	Convex2d ListConvex3[7];
+
+	float percent = 0;
+	for (int i = 0; i < 10; i++) {
+		//Svg doc("Metamorph.svg" + i, WIDTH, HEIGHT);
+		ListConvex[i] = Convex2d::Metamorph(Triangle, Rond, percent);
+		percent += 0.1f;
+
+		doc.addConvexEdge(ListConvex[i], HEIGHT);
+		//doc.save();
+	}
+	percent = 0;
+	for (int i = 0; i < 5; i++) {
+
+		ListConvex2[i] = Convex2d::Metamorph(Rond, Polygone, percent);
+
+		percent += 1.f / 4.f;
+		doc.addConvexEdge(ListConvex2[i], HEIGHT);
+	}
+
+	percent = 0;
+	for (int i = 0; i < 7; i++) {
+
+		ListConvex3[i] = Convex2d::Metamorph(Polygone, Triangle, percent);
+
+		percent += 1.f / 6.f;
+		doc.addConvexEdge(ListConvex3[i], HEIGHT);
+	}
+	
+	//doc.addConvexEdge(Polygone, HEIGHT);
 	doc.save();
-
 
 
 	system("pause");

@@ -21,11 +21,10 @@ const float M_PI = 3.141592653589793f;
 int main(void)
 {
 	srand((int)time(NULL));
-
-	const int WIDTH = 3000;
-	const int HEIGHT = 2000;
+	const int WIDTH = 1500;
+	const int HEIGHT = 1500;
 	const int MAX_VERTEX = 10000;
-	const int REPEAT_VERTEX = 5;
+
 
 	// Measure convexe creation from 3 to MAX_VERTEX 
 	/*********************************************************************************************************************************************/
@@ -68,48 +67,51 @@ int main(void)
 	// Rand on circle
 	/*********************************************************************************************************************************************/
 
-	//Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 500;
-	//std::vector<Vector2d> testConvexRandom;
-	//float factSide = 2.f * M_PI / (float)180;
-	//for (unsigned int i = 0; i < MAX_VERTEX; i++)
-	//{
-	//	float angle = randf(0.f, 180) * factSide;
-	//	testConvexRandom.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
-	//}
+	Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 500;
+	std::vector<Vector2d> testConvexRandom;
+	float factSide = 2.f * M_PI / (float)180;
+	for (unsigned int i = 0; i < MAX_VERTEX; i++)
+	{
+		float angle = randf(0.f, 180) * factSide;
+		testConvexRandom.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
+	}
 
 	// Rand on disk
 	/*********************************************************************************************************************************************/
 
-	Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 500;
-	std::vector<Vector2d> testConvexRandom;
-	for (unsigned int i = 0; i < MAX_VERTEX; i++)
-	{
-		Vector2d rand = Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT);
-	//	float angle = randf(0.f, 180) * factSide;
-		if((rand - c).Length() <= rayon)
-			testConvexRandom.push_back(rand);
-	}
+	//Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 750;
+	//std::vector<Vector2d> testConvexRandom;
+	//for (unsigned int i = 0; testConvexRandom.size() < MAX_VERTEX; i++)
+	//{
+	//	Vector2d rand = Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT);
+	////	float angle = randf(0.f, 180) * factSide;
+	//	if((rand - c).Length() <= rayon)
+	//		testConvexRandom.push_back(rand);
+	//}
+
+	// Rand on Rectangle
+	/*********************************************************************************************************************************************/
 
 	//std::vector<Vector2d> testConvexRandom;
 	//for (int i = 0; i < MAX_VERTEX; ++i)
 	//{
 	//	testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
 	//}
-	std::cout << "Start measure " << std::endl;
-	//		Convex2d measureConvex(measureVertex, ColorRGB(255.f, 0.f, 0.f));
-//	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
-	 auto start = std::chrono::high_resolution_clock::now();
-	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
-	auto end = std::chrono::high_resolution_clock::now();
-	std::cout << " Time : " << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f<< " s " << std::endl;
-	mesureFile << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f << " s " << std::endl;
-//	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
-//	Polygone2d poly2 = convex2;
-	Svg doc("testCircle.svg", (float)WIDTH, (float)HEIGHT);
+	//std::cout << "Start measure " << std::endl;
+	////		Convex2d measureConvex(measureVertex, ColorRGB(255.f, 0.f, 0.f));
+	////	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
+	//auto start = std::chrono::high_resolution_clock::now();
+	//Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
+	//auto end = std::chrono::high_resolution_clock::now();
+	//std::cout << " Time : " << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f << " s " << std::endl;
+	//mesureFile << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f << " s " << std::endl;
+	////	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
+	////	Polygone2d poly2 = convex2;
+	//Svg doc("testCircle.svg", (float)WIDTH, (float)HEIGHT);
 
-	doc.addConvexPoint(convex2, HEIGHT);
-	doc.addConvexEdge(convex2, HEIGHT);
-	doc.save();
+	//doc.addConvexPoint(convex2, HEIGHT);
+	//doc.addConvexEdge(convex2, HEIGHT);
+	//doc.save();
 
 	// Test Minkoswki
 	/*********************************************************************************************************************************************/
@@ -191,7 +193,7 @@ int main(void)
 	// Test morph
 	/*********************************************************************************************************************************************/
 	//Convex2d PieceEchec2({ Vector2d(970, 10), Vector2d(880, 10),Vector2d(880, 35),Vector2d(860, 35),Vector2d(860, 65),Vector2d(880, 65),Vector2d(880, 100),Vector2d(850, 125),Vector2d(880, 150),Vector2d(970, 150),Vector2d(1000, 125),Vector2d(970, 100), Vector2d(970, 65),Vector2d(990, 65),Vector2d(990, 35),Vector2d(970, 35) }, ColorRGB(255.f, 255.f, 0.f));
-	
+
 	//Vector2d c(2900, 100); float rayon = 90;
 	//std::vector<Vector2d> listVectorRond;
 	//float factSide = 2.f * M_PI / (float)180;
@@ -238,7 +240,7 @@ int main(void)
 	//	percent += 1.f / 6.f;
 	//	doc.addConvexEdge(ListConvex3[i], HEIGHT);
 	//}
-	
+
 	//doc.addConvexEdge(Polygone, HEIGHT);
 	//doc.save();
 

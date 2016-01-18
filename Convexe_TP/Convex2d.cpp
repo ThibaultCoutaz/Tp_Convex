@@ -51,17 +51,21 @@ Convex2d::Convex2d(const Vector2d & a, const Vector2d & b, const Vector2d & c, c
 Convex2d::Convex2d(Convex2d convex, const Vector2d & vertex, const ColorRGB& color) : Polygone2d(std::vector<Vector2d>(), color) // add a vertex to convex set
 {
 	vertices = convex.vertices;
-	edges = convex.edges;
+	//edges = convex.edges;
+	edges = std::vector<Vector2d>();
 	std::vector<Vector2d> erased;
-	for (int i = 0; i < edges.size(); ++i)
+	for (int i = 0; i < convex.edges.size(); ++i)
 	{
-		if (!IsEdgeLookingAtPoint(vertices[(int)edges[i].x], vertices[(int)edges[i].y], vertex))
+		if (!IsEdgeLookingAtPoint(vertices[(int)convex.edges[i].x], vertices[(int)convex.edges[i].y], vertex))
 		{
-			erased.push_back(edges[i]);
-			edges.erase(edges.begin() + i);
-			--i;
+			erased.push_back(convex.edges[i]);
+			//edges.erase(edges.begin() + i);
+			//--i;
 		}
+		else
+			edges.push_back(convex.edges[i]);
 	}
+
 	vertices.push_back(vertex);
 	int size = (int)vertices.size() - 1;
 	if (erased.size() > 0)
@@ -103,15 +107,20 @@ Convex2d::Convex2d(std::vector<Vector2d> verteces, const ColorRGB& color2)
 	Convex2d firstTriangle = Convex2d(verteces[size - 1], verteces[size - 2], verteces[size - 3], color2);
 	vertices = firstTriangle.vertices;
 	edges = firstTriangle.edges;
-	for (int i = 0; i < 3; ++i)
-		verteces.pop_back();
-	while (verteces.size() > 0)
+
+	/*for (int i = 0; i < 3; ++i)
+		verteces.pop_back();*/
+
+	for (int i = 0; i < verteces.size() - 3; i++)
 	{
-		firstTriangle = Convex2d(firstTriangle, verteces.back(), color2);
-		vertices = firstTriangle.vertices;
-		edges = firstTriangle.edges;
-		verteces.pop_back();
+		firstTriangle = Convex2d(firstTriangle, verteces[i], color2);
+	/*	vertices = firstTriangle.vertices;
+		edges = firstTriangle.edges;*/
+		//verteces.pop_back();
 	}
+
+	vertices = firstTriangle.vertices;
+	edges = firstTriangle.edges;
 	color = color2;
 	
 }

@@ -23,7 +23,7 @@ int main(void)
 	srand((int)time(NULL));
 	const int WIDTH = 3000;
 	const int HEIGHT = 2000;
-	const int MAX_VERTEX = 100;
+	const int MAX_VERTEX = 10000;
 	const int REPEAT_VERTEX = 5;
 
 
@@ -63,22 +63,22 @@ int main(void)
 	// Test convex 2D
 	/*********************************************************************************************************************************************/
 
-	//////convex.displayData();
-//	std::vector<Vector2d> testConvexRandom;
-//	for (int i = 0; i < 1000; ++i)
-//	{
-//		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
-//	}
-////
-////	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
-//	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
-////	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
-////	Polygone2d poly2 = convex2;
-//	Svg doc("test.svg", (float)WIDTH, (float)HEIGHT);
+	////convex.displayData();
+	std::vector<Vector2d> testConvexRandom;
+	for (int i = 0; i < MAX_VERTEX; ++i)
+	{
+		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
+	}
 //
-//	doc.addConvexPoint(convex2, HEIGHT);
-//	doc.addConvexEdge(convex2, HEIGHT);
-//	doc.save();
+//	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
+	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
+//	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
+//	Polygone2d poly2 = convex2;
+	Svg doc("test.svg", (float)WIDTH, (float)HEIGHT);
+
+	doc.addConvexPoint(convex2, HEIGHT);
+	doc.addConvexEdge(convex2, HEIGHT);
+	doc.save();
 
 	// Test Minkoswki
 	/*********************************************************************************************************************************************/
@@ -109,40 +109,40 @@ int main(void)
 	//triangleDoc.addConvexPoint(triangle, HEIGHT);
 	//triangleDoc.save();
 
-	Vector2d c(500, 500); float rayon = 90;
-	std::vector<Vector2d> listVectorRond;
-	float factSide = 2.f * M_PI / (float)180;
-	for (unsigned int i = 0; i < 180; i++)
-	{
-		float angle = i * factSide;
-		listVectorRond.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
-	}
-	
-	Convex2d Rond(listVectorRond, ColorRGB(255.f, 255.f, 0.f));
+	//Vector2d c(500, 500); float rayon = 90;
+	//std::vector<Vector2d> listVectorRond;
+	//float factSide = 2.f * M_PI / (float)180;
+	//for (unsigned int i = 0; i < 180; i++)
+	//{
+	//	float angle = i * factSide;
+	//	listVectorRond.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
+	//}
+	//
+	//Convex2d Rond(listVectorRond, ColorRGB(255.f, 255.f, 0.f));
 
-	Svg rond("rond.svg", (float)WIDTH, (float)HEIGHT);
-	rond.addConvexEdge(Rond, HEIGHT);
-	//rond.addConvexPoint(Rond, HEIGHT);
-	rond.save();
+	//Svg rond("rond.svg", (float)WIDTH, (float)HEIGHT);
+	//rond.addConvexEdge(Rond, HEIGHT);
+	////rond.addConvexPoint(Rond, HEIGHT);
+	//rond.save();
 
-	Convex2d maison({
-		Vector2d(10, 10),
-		Vector2d(410, 10),
-		Vector2d(410, 310),
-		Vector2d(210, 510),
-		Vector2d(10, 310)
-	}, ColorRGB(255.f, 255.f, 0.f));
+	//Convex2d maison({
+	//	Vector2d(10, 10),
+	//	Vector2d(410, 10),
+	//	Vector2d(410, 310),
+	//	Vector2d(210, 510),
+	//	Vector2d(10, 310)
+	//}, ColorRGB(255.f, 255.f, 0.f));
 
-	Svg poly1("poly1.svg", (float)WIDTH, (float)HEIGHT);
-	poly1.addConvexPoint(maison, HEIGHT);
-	poly1.addConvexEdge(maison, HEIGHT);	
-	poly1.save();
+	//Svg poly1("poly1.svg", (float)WIDTH, (float)HEIGHT);
+	//poly1.addConvexPoint(maison, HEIGHT);
+	//poly1.addConvexEdge(maison, HEIGHT);	
+	//poly1.save();
 
-	Convex2d minkowskiSum(maison.minkowskiSum(Rond));
-	Svg minkowskiSumDoc("minkowskiSum.svg", (float)WIDTH, (float)HEIGHT);
-	minkowskiSumDoc.addConvexPoint(minkowskiSum, HEIGHT);
-	minkowskiSumDoc.addConvexEdge(minkowskiSum, HEIGHT);	
-	minkowskiSumDoc.save();
+	//Convex2d minkowskiSum(maison.minkowskiSum(Rond));
+	//Svg minkowskiSumDoc("minkowskiSum.svg", (float)WIDTH, (float)HEIGHT);
+	//minkowskiSumDoc.addConvexPoint(minkowskiSum, HEIGHT);
+	//minkowskiSumDoc.addConvexEdge(minkowskiSum, HEIGHT);	
+	//minkowskiSumDoc.save();
 
 
 	// Test export
@@ -211,6 +211,6 @@ int main(void)
 	//doc.addConvexEdge(Polygone, HEIGHT);
 	//doc.save();
 
-	//system("pause");
+	system("pause");
 	return 1;
 }

@@ -21,11 +21,11 @@ const float M_PI = 3.141592653589793f;
 int main(void)
 {
 	srand((int)time(NULL));
+
 	const int WIDTH = 3000;
 	const int HEIGHT = 2000;
 	const int MAX_VERTEX = 10000;
 	const int REPEAT_VERTEX = 5;
-
 
 	// Measure convexe creation from 3 to MAX_VERTEX 
 	/*********************************************************************************************************************************************/
@@ -63,18 +63,49 @@ int main(void)
 	// Test convex 2D
 	/*********************************************************************************************************************************************/
 
-	////convex.displayData();
+	//////convex.displayData();
+	std::ofstream mesureFile("mesureConvex.txt", std::ios::out | std::ios::trunc);
+	// Rand on circle
+	/*********************************************************************************************************************************************/
+
+	//Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 500;
+	//std::vector<Vector2d> testConvexRandom;
+	//float factSide = 2.f * M_PI / (float)180;
+	//for (unsigned int i = 0; i < MAX_VERTEX; i++)
+	//{
+	//	float angle = randf(0.f, 180) * factSide;
+	//	testConvexRandom.push_back(Vector2d(c.x + rayon * cos(angle), c.y + rayon*  sin(angle)));
+	//}
+
+	// Rand on disk
+	/*********************************************************************************************************************************************/
+
+	Vector2d c(WIDTH * 0.5f, HEIGHT * 0.5f); float rayon = 500;
 	std::vector<Vector2d> testConvexRandom;
-	for (int i = 0; i < MAX_VERTEX; ++i)
+	for (unsigned int i = 0; i < MAX_VERTEX; i++)
 	{
-		testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
+		Vector2d rand = Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT);
+	//	float angle = randf(0.f, 180) * factSide;
+		if((rand - c).Length() <= rayon)
+			testConvexRandom.push_back(rand);
 	}
-//
+
+	//std::vector<Vector2d> testConvexRandom;
+	//for (int i = 0; i < MAX_VERTEX; ++i)
+	//{
+	//	testConvexRandom.push_back(Vector2d::Random(0.f, (float)WIDTH, 0.f, (float)HEIGHT));
+	//}
+	std::cout << "Start measure " << std::endl;
+	//		Convex2d measureConvex(measureVertex, ColorRGB(255.f, 0.f, 0.f));
 //	Polygone2d poly2(testConvexRandom, ColorRGB(0.f, 255.f, 0.f));
+	 auto start = std::chrono::high_resolution_clock::now();
 	Convex2d convex2(testConvexRandom, ColorRGB(255.f, 0.f, 0.f));
+	auto end = std::chrono::high_resolution_clock::now();
+	std::cout << " Time : " << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f<< " s " << std::endl;
+	mesureFile << std::chrono::duration<float, std::milli>(end - start).count() * 0.001f << " s " << std::endl;
 //	Convex2d convex3({ Vector2d(10, 10), Vector2d(100, 10), Vector2d(100, 100) }, ColorRGB(255.f, 255.f, 0.f));
 //	Polygone2d poly2 = convex2;
-	Svg doc("test.svg", (float)WIDTH, (float)HEIGHT);
+	Svg doc("testCircle.svg", (float)WIDTH, (float)HEIGHT);
 
 	doc.addConvexPoint(convex2, HEIGHT);
 	doc.addConvexEdge(convex2, HEIGHT);
